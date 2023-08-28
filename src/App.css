@@ -1,0 +1,20 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 0 2px 12px 3px gray;
+}
+a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: black;
+}
+ul > a:hover {
+    color: gray;
+}
