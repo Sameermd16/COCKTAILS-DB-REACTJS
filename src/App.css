@@ -8,7 +8,7 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    box-shadow: 0 2px 12px 3px gray;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 a {
     margin-left: 20px;
@@ -17,4 +17,35 @@ a {
 }
 ul > a:hover {
     color: gray;
+}
+
+.cocktails_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    gap: 40px;
+    justify-content: center;
+}
+
+.details_btn {
+    background-color: rgba(0, 128, 0, 0.488);
+    padding: 5px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: white;
+    margin-left: 0px;
+}
+.details_btn:hover {
+    background-color: green;
+}
+
+.search_box_input {
+    padding: 30px;
+    text-align: center;
+    width: 400px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.search_box {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
 }

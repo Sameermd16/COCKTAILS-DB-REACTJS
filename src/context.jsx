@@ -22,7 +22,21 @@ function AppProvider({children}) {
             const drinks = data.data.drinks 
             // console.log(drinks)
             if(drinks) {
-                setCocktails(drinks)
+                const newCocktails = drinks.map((item) => {
+                    //changing to simple property names
+                    const { idDrink, strDrink, strDrinkThumb, strAlcoholic, strGlass } = item
+
+                    return (
+                        {
+                            id: idDrink,
+                            name: strDrink,
+                            image: strDrinkThumb,
+                            info: strAlcoholic,
+                            glass: strGlass
+                        }
+                    )
+                })
+                setCocktails(newCocktails)
             }else {
                 setCocktails([])
             }
@@ -37,7 +51,7 @@ function AppProvider({children}) {
     }, [searchTerm])
 
 
-    const props = { loading, setSearchTerm, cocktails }
+    const props = { loading, setSearchTerm, cocktails, setLoading }
 
     return (
         <AppContext.Provider value={props} >

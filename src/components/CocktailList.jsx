@@ -1,10 +1,11 @@
 import React from 'react'
 import { useGlobalContext } from '../context'
+import Cocktail from './Cocktail'
 
 export default function CocktailList() {
 
     const { loading, cocktails } = useGlobalContext()
-    console.log(cocktails)
+    // console.log(cocktails)
 
     if(loading) {
         return <h1 style={{textAlign: 'center', margin: '40px'}}>LOADING...</h1>
@@ -18,15 +19,17 @@ export default function CocktailList() {
     }
 
     return (
-        <div>
-            {
-                cocktails.map((item) => {
-                    const { strDrinkThumb } = item
-                    return (
-                        <img src={strDrinkThumb} width='300px' />
-                    )
-                })
-            }
-        </div>
+        <section>
+            <h2 style={{textAlign: 'center', marginBottom: '30px'}}>cocktails</h2>
+            <div className='cocktails_container'>
+                {
+                    cocktails.map((item) => {
+                        return (
+                            <Cocktail key={item.id} />
+                        )
+                    })
+                }
+            </div>
+        </section>
     )
 }
