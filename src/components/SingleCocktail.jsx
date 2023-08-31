@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useGlobalContext } from '../context'
 import axios from 'axios'
 
-const url = 'www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' 
+// const url = 'www.thecocktaildb.com/api/json/v1/1/lookup.php?i='  
 
 export default function SingleCocktail() {
     const { loading, setLoading } = useGlobalContext()
     const [oneCocktail, setOneCocktail] = useState(null)
     console.log(oneCocktail)
-
     const { id } = useParams()
+
+    useEffect(() => {
+        getSingleCocktail()
+    }, [id])
 
     async function getSingleCocktail() {
         setLoading(true)
@@ -59,7 +62,7 @@ export default function SingleCocktail() {
                     ingredients
                 }
                 setOneCocktail(newCocktail)
-            }else {
+            } else {
                 setOneCocktail(null)
             }
         } catch(error) {
@@ -67,14 +70,60 @@ export default function SingleCocktail() {
         }
         setLoading(false)
     }
-    
-    useEffect(() => {
-        getSingleCocktail()
-    }, [id])
 
-    return (
-        <div> 
-               
-        </div>
-    )
+    if(loading) {
+        return <h1 style={{textAlign: 'center', margin: '40px'}}>LOADING...</h1>
+    }
+    
+    if(!oneCocktail) {
+        return <h2>no cocktail to display</h2>
+    } else {
+        const { name, image, info, category, glass, instructions, ingredients } = oneCocktail
+
+        return (
+            <section style={{}}> 
+                <div style={{width: '70%', margin: 'auto'}}>
+                    <Link to='/' >back home</Link>
+                    <h2 style={{textAlign: 'center'}}> {name} </h2>
+                    <div>
+                        <img src={image} alt={name} width='350px' />
+                        <div className='drink-info'>
+                            <p>
+                                <span>name: </span> {name}
+                            </p>
+                            <p>
+                                <span>category: </span> {category}
+                            </p>
+                            <p>
+                                <span>info: </span> {info}
+                            </p>
+                            <p>
+                                <span>glass: </span> {glass}
+                            </p>
+                            <p>
+                                <span>instructions: </span> {instructions}
+                            </p>
+                            <p>
+                                <span>ingredients: </span> {
+                                    ingredients.map((item, index) => {
+                                        return item? <span key={index}> {item} </span> : null
+                                    })
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+
+
+    // return (
+    //     <div> 
+    //         {/* <p> {name} </p>
+    //         <img src={image} alt="" /> */}
+    //         single component
+    //     </div>
+    // )
 }
